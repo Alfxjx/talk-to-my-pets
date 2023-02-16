@@ -16,11 +16,20 @@ export const Layout = ({ children }) => {
 				Created by
 				<a
 					className="ml-1 text-[#973cc1]"
-					href="https://github.com/alfxjx"
+					href="https://github.com/Alfxjx/talk-to-my-pets"
 					target={"_blank"}
 					rel={"noreferrer"}
 				>
 					Alfxjx
+				</a>
+				. Inspired by
+				<a
+					className="ml-1 text-[#973cc1]"
+					href="https://www.xiaohongshu.com/user/profile/5a19e2264eacab68093ff50e"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Jellicle
 				</a>
 			</div>
 		</main>
