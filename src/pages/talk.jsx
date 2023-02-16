@@ -53,15 +53,25 @@ export default function Talk() {
 				alert(error.message);
 			}
 		};
+
+		const [initialVal, setInitialVal] = useState({
+			petType: "cat",
+			petName: "",
+			otherInfo: "",
+		});
+
+		const handleTest = () => {
+			setInitialVal({
+				petType: "dog",
+				petName: "Pepe",
+				otherInfo: "He is my dog, he passed away last year. I missed him a lot",
+			});
+		};
 		return (
 			<section className="flex flex-col items-center justify-center w-64">
 				<Formik
-					initialValues={{
-						petType: "cat",
-						petName: "Pepe",
-						otherInfo:
-							"He is my dog, he passed away last year. I missed him a lot",
-					}}
+					initialValues={initialVal}
+					enableReinitialize={true}
 					validate={(values) => {
 						const errors = {};
 						if (!values.petName) {
@@ -149,16 +159,25 @@ export default function Talk() {
 									/>
 								</div>
 
-								<button
-									type="submit"
-									disabled={isSubmitting}
-									className={`btn btn-primary mt-4 ${
-										isSubmitting ? "loading" : ""
-									}`}
-									onClick={handleStartOK}
-								>
-									start talking
-								</button>
+								<div className="flex justify-start items-center mt-4">
+									<button
+										type="submit"
+										disabled={isSubmitting}
+										className={`btn btn-primary  ${
+											isSubmitting ? "loading" : ""
+										}`}
+										onClick={handleStartOK}
+									>
+										start talking
+									</button>
+									<button
+										className="btn btn-secondary ml-2"
+										onClick={handleTest}
+										type="button"
+									>
+										Test
+									</button>
+								</div>
 							</form>
 						);
 					}}
@@ -217,7 +236,7 @@ export default function Talk() {
 									onChange={handleChange}
 								></textarea>
 								<button className="btn btn-primary" type="submit">
-									submit / refresh
+									submit / continue
 								</button>
 							</form>
 						);
