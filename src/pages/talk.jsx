@@ -214,7 +214,7 @@ export default function Talk() {
 			}
 		};
 		return (
-			<section className="flex flex-col items-center justify-center w-full h-screen px-4">
+			<section className="flex flex-col items-center justify-center w-full h-screen px-4 mt-8">
 				<Formik initialValues={{ chat: val }} onSubmit={handleChat}>
 					{({
 						values,
@@ -235,7 +235,12 @@ export default function Talk() {
 									value={values.chat}
 									onChange={handleChange}
 								></textarea>
-								<button className="btn btn-primary" type="submit">
+								<button
+									className={`btn btn-primary  ${
+										isSubmitting ? "loading" : ""
+									}`}
+									type="submit"
+								>
 									submit / continue
 								</button>
 							</form>
