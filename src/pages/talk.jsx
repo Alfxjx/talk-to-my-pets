@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Field } from "formik";
 
 import { Layout } from "@/components/Layout";
@@ -43,7 +43,6 @@ export default function Talk() {
 						new Error(`Request failed with status ${response.status}`)
 					);
 				}
-
 				setSubmitting(false);
 				setStep(2);
 				setVal(`${prompt}${data.result}`);
@@ -205,8 +204,16 @@ export default function Talk() {
 						new Error(`Request failed with status ${response.status}`)
 					);
 				}
-				setSubmitting(false);
-				setVal(`${val.chat}${data.result}`);
+
+				if (data.result) {
+					await setVal(`${val.chat}${data.result}`);
+					await handleChat(
+						{ chat: `${val.chat}${data.result}` },
+						{ setSubmitting }
+					);
+				} else {
+					setSubmitting(false);
+				}
 			} catch (error) {
 				// Consider implementing your own error handling logic here
 				console.error(error);
@@ -236,12 +243,13 @@ export default function Talk() {
 									onChange={handleChange}
 								></textarea>
 								<button
+									disabled={isSubmitting}
 									className={`btn btn-primary  ${
 										isSubmitting ? "loading" : ""
 									}`}
 									type="submit"
 								>
-									submit / continue
+									submit
 								</button>
 							</form>
 						);
